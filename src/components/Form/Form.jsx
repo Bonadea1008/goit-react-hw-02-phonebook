@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import css from '../Form/Form.module.css';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 export class InputForm extends Component {
   state = {
@@ -21,7 +21,12 @@ export class InputForm extends Component {
     const { name, number } = this.state;
 
     if (this.props.contacts.find(contact => contact.name === name)) {
-      return alert(`${name} is already in contacts!`);
+      alert(`${name} is already in contacts!`);
+      this.setState({
+        name: '',
+        number: '',
+      });
+      return;
     }
 
     const newContact = {
@@ -76,3 +81,8 @@ export class InputForm extends Component {
     );
   }
 }
+
+InputForm.propTypes = {
+  name: PropTypes.string,
+  number: PropTypes.number,
+};
